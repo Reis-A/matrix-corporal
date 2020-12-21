@@ -3,6 +3,7 @@ package hook
 import (
 	"bytes"
 	"context"
+	"crypto/tls"
 	"devture-matrix-corporal/corporal/httphelp"
 	"encoding/json"
 	"fmt"
@@ -66,10 +67,17 @@ type RESTServiceConsultor struct {
 }
 
 func NewRESTServiceConsultor(defaultTimeoutDuration time.Duration) *RESTServiceConsultor {
+	tr := http.DefaultTransport.(*http.Transport).Clone()
+	tr.ForceAttemptHTTP2 = false
+	tr.TLSNextProto = make(map[string]func(authority string, c *tls.Conn) http.RoundTripper)
+	tr.TLSClientConfig = &tls.Config{}
+
 	return &RESTServiceConsultor{
 		defaultTimeoutDuration: defaultTimeoutDuration,
 
-		httpClient: &http.Client{},
+		httpClient: &http.Client{
+			Transport: tr,
+		},
 	}
 }
 
