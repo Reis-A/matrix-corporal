@@ -1,5 +1,25 @@
 # vim:ft=yaml
+# Configuration file for Synapse.
+#
+# This is a YAML file: see [1] for a quick introduction. Note in particular
+# that *indentation is important*: all the elements of a list or dictionary
+# should have the same indentation.
+#
+# [1] https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html
 
+
+## Modules ##
+
+# Server admins can expand Synapse's functionality with external modules.
+#
+# See https://matrix-org.github.io/synapse/develop/modules.html for more
+# documentation on how to configure or create custom modules for Synapse.
+#
+modules:
+    - module: shared_secret_authenticator.SharedSecretAuthProvider
+      config:
+          shared_secret: "7DXvheK1400ydCHjAymDU50FkeUedQJ2AYpitr3inLpSBIdRJN4kfS5IkGYvUptF"
+          m_login_password_support_enabled: true
 ## Server ##
 
 # The domain name of the server, with optional explicit port.
@@ -1200,13 +1220,13 @@ password_config:
 #        #bind_dn:
 #        #bind_password:
 #        #filter: "(objectClass=posixAccount)"
-password_providers:
-- module: "shared_secret_authenticator.SharedSecretAuthenticator"
-  config:
-    sharedSecret: "7DXvheK1400ydCHjAymDU50FkeUedQJ2AYpitr3inLpSBIdRJN4kfS5IkGYvUptF"
-- module: "rest_auth_provider.RestAuthProvider"
-  config:
-    endpoint: "http://matrix-corporal:41080/_matrix/corporal"
+# password_providers:
+# - module: "shared_secret_authenticator.SharedSecretAuthenticator"
+#   config:
+#     sharedSecret: "7DXvheK1400ydCHjAymDU50FkeUedQJ2AYpitr3inLpSBIdRJN4kfS5IkGYvUptF"
+# - module: "rest_auth_provider.RestAuthProvider"
+#   config:
+#     endpoint: "http://matrix-corporal:41080/_matrix/corporal"
 
 
 # Clients requesting push notifications can either have the body of
