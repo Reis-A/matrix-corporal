@@ -28,8 +28,8 @@ services:
     - postgres:postgres
     volumes:
     - ../etc/services/matrix-synapse:/data
-    - ./../etc/services/shared_secret_authenticator.py:/usr/local/lib/python3.9/site-packages/shared_secret_authenticator.py:ro
-    - ./../etc/services/rest_auth_provider.py:/usr/local/lib/python3.9/site-packages/rest_auth_provider.py
+    - ./../etc/services/shared_secret_authenticator.py:/usr/local/lib/python3.11/site-packages/shared_secret_authenticator.py:ro
+    - ./../etc/services/rest_auth_provider.py:/usr/local/lib/python3.11/site-packages/rest_auth_provider.py
     - ./matrix-synapse-media-store:/media_store
 
   element-web:
