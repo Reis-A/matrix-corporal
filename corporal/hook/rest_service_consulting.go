@@ -259,7 +259,7 @@ func prepareConsultingHTTPRequestFactory(
 	return func() (*http.Request, error) {
 		// This needs to be done each time, because it uses absolute time inside.
 		ctx, cancel := context.WithTimeout(context.Background(), timeoutDuration)
-		defer cancel()
+		//defer cancel()
 
 		consultingHTTPRequest, err := http.NewRequestWithContext(
 			ctx,
@@ -268,6 +268,7 @@ func prepareConsultingHTTPRequestFactory(
 			bytes.NewReader(consultingRequestPayloadBytes),
 		)
 		if err != nil {
+			cancel()
 			return nil, err
 		}
 
